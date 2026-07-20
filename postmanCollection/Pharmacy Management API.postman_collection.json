@@ -1,0 +1,195 @@
+{
+  "info": {
+    "_postman_id": "2649d92d-162b-4ed1-a8f1-79948b540d14",
+    "name": "Pharmacy Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56792246",
+    "_collection_link": "https://go.postman.co/collection/56792246-2649d92d-162b-4ed1-a8f1-79948b540d14?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get Products",
+      "request": {
+        "auth": {
+          "type": "oauth2",
+          "oauth2": [
+            {
+              "key": "accessTokenUrl",
+              "value": "https://orgfarm-67840bb14f-dev-ed.develop.my.salesforce.com/services/oauth2/token",
+              "type": "string"
+            },
+            {
+              "key": "authUrl",
+              "value": "https://orgfarm-67840bb14f-dev-ed.develop.my.salesforce.com/services/oauth2/authorize",
+              "type": "string"
+            },
+            {
+              "key": "addTokenTo",
+              "value": "header",
+              "type": "string"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "https://oauth.pstmn.io/v1/callback",
+              "type": "string"
+            },
+            {
+              "key": "useBrowser",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "key": "clientSecret",
+              "value": "{{clientSecret}}",
+              "type": "string"
+            },
+            {
+              "key": "clientId",
+              "value": "{{clientId}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{instanceUrl}}/services/apexrest/abc/products",
+          "host": [
+            "{{instanceUrl}}"
+          ],
+          "path": [
+            "services",
+            "apexrest",
+            "abc",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Cart",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customerCode\": \"{{customerCode}}\"\n}"
+        },
+        "url": {
+          "raw": "{{instanceUrl}}/services/apexrest/abc/cart",
+          "host": [
+            "{{instanceUrl}}"
+          ],
+          "path": [
+            "services",
+            "apexrest",
+            "abc",
+            "cart"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Product To Cart",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customerCode\": \"{{customerCode}}\",\n  \"productName\": \"Paracetamol\",\n  \"quantity\": 2\n}"
+        },
+        "url": {
+          "raw": "{{instanceUrl}}/services/apexrest/abc/cart/items",
+          "host": [
+            "{{instanceUrl}}"
+          ],
+          "path": [
+            "services",
+            "apexrest",
+            "abc",
+            "cart",
+            "items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Checkout Cart",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customerCode\": \"{{customerCode}}\"\n}"
+        },
+        "url": {
+          "raw": "{{instanceUrl}}/services/apexrest/abc/cart/checkout",
+          "host": [
+            "{{instanceUrl}}"
+          ],
+          "path": [
+            "services",
+            "apexrest",
+            "abc",
+            "cart",
+            "checkout"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "instanceUrl",
+      "value": "https://YOURDOMAIN.my.salesforce.com"
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "customerCode",
+      "value": "CUST001"
+    }
+  ]
+}

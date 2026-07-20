@@ -1,0 +1,99 @@
+<apex:page controller="OrderController_abc">
+
+    <apex:form>
+
+        <apex:pageBlock title="Warehouse Orders">
+
+            <apex:outputPanel id="ordersPanel">
+
+                <!-- Header -->
+                <table width="100%" border="1" cellspacing="0" cellpadding="6" style="border-collapse:collapse;">
+
+                    <tr style="font-weight:bold;background:#f3f3f3;">
+                        <th width="5%"></th>
+                        <th width="35%">Order Number</th>
+                        <th width="30%">Status</th>
+                        <th width="30%">Effective Date</th>
+                    </tr>
+
+                    <apex:repeat value="{!orders}" var="wrapper">
+
+                        <!-- Order Row -->
+                        <tr>
+
+                            <td align="center">
+
+                                <apex:commandLink action="{!toggleOrder}" rerender="ordersPanel">
+
+                                    <apex:param name="id" value="{!wrapper.order.Id}" />
+
+                                    <apex:outputText value="{!IF(wrapper.expanded,'▼','►')}" />
+
+                                </apex:commandLink>
+
+                            </td>
+
+                            <td>
+
+                                {!wrapper.icon} {!wrapper.order.Name}
+
+                            </td>
+
+                            <td>
+
+                                {!wrapper.order.Status_abc__c}
+
+                            </td>
+
+                            <td>
+
+                                <apex:outputText value="{0,date,dd-MMM-yyyy}">
+                                    <apex:param value="{!wrapper.order.Effective_Date_abc__c}" />
+                                </apex:outputText>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- Expanded Product Row -->
+                        <apex:outputPanel rendered="{!wrapper.expanded}" layout="none">
+
+                            <tr>
+
+                                <td></td>
+
+                                <td colspan="3">
+
+                                    <apex:pageBlockTable value="{!wrapper.orderItems}" var="item">
+
+                                        <apex:column headerValue="Product">
+                                            {!item.Product_abc__r.Name}
+                                        </apex:column>
+
+                                        <apex:column headerValue="Quantity">
+                                            {!item.Quantity_abc__c}
+                                        </apex:column>
+
+                                        <apex:column headerValue="Unit Price">
+                                            {!item.Unit_Price_abc__c}
+                                        </apex:column>
+
+                                    </apex:pageBlockTable>
+
+                                </td>
+
+                            </tr>
+
+                        </apex:outputPanel>
+
+                    </apex:repeat>
+
+                </table>
+
+            </apex:outputPanel>
+
+        </apex:pageBlock>
+
+    </apex:form>
+
+</apex:page>
